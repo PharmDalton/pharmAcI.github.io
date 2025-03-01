@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - The PharmAcI</title>
+    <style>
+        /* General Page Styling */
+        :root {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --accent: #ff006e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --warning: #ffc107;
+        }
+        
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .logo:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+            display: inline-block;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1200/300');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .page-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .breadcrumbs {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumbs a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--accent);
+        }
+        
+        .breadcrumbs .separator {
+            margin: 0 0.5rem;
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .terms-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .terms-section {
+            margin-bottom: 2rem;
+        }
+        
+        .terms-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .terms-section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .terms-section h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+        }
+        
+        .terms-section p, .terms-section ul {
+            line-height: 1.6;
+        }
+        
+        .terms-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .terms-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .last-updated {
+            font-style: italic;
+            color: #777;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 1rem 2rem;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.7rem;
+        }
+        
+        .footer-column a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .footer-column a::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: transform 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-column a:hover::before {
+            transform: translateX(3px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                The Pharm<span>AcI</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="medications.html">Medications</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Terms of Service</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a>
+            <span class="separator">></span>
+            <span>Terms of Service</span>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main>
+        <div class="terms-content">
+            <div class="terms-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to The PharmAcI ("we," "our," or "us"). These Terms of Service ("Terms") govern your access to and use of our website, services, and AI chatbot assistant Rex (collectively, the "Services"). By accessing or using our Services, you agree to be bound by these Terms.</p>
+                
+                <p>Please read these Terms carefully before using our Services. If you do not agree to these Terms, you must not access or use our Services.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>2. Services Description</h2>
+                <p>The PharmAcI provides an AI-powered pharmacy assistant ("Rex") designed to provide general information about medications, potential side effects, and general health topics. Our Services may include:</p>
+                
+                <ul>
+                    <li>General medication information</li>
+                    <li>Potential side effects and drug interactions</li>
+                    <li>Basic health information</li>
+                    <li>Prescription refill scheduling</li>
+                    <li>Health screening information</li>
+                </ul>
+                
+                <h3>2.1 Limitations of Our Services</h3>
+                <p>Our Services are for informational purposes only and are not intended to replace professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>3. User Accounts</h2>
+                <p>Some features of our Services may require you to create an account. When you create an account, you must provide accurate and complete information. You are solely responsible for the activity that occurs on your account, and you must keep your account password secure.</p>
+                
+                <h3>3.1 Account Security</h3>
+                <p>You must notify us immediately of any breach of security or unauthorized use of your account. We cannot and will not be liable for any loss or damage arising from your failure to comply with these requirements.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>4. Privacy Policy</h2>
+                <p>Your privacy is important to us. Our Privacy Policy, which is incorporated into these Terms by reference, explains how we collect, use, and disclose information about you. By using our Services, you agree to our collection, use, and disclosure of information as described in our Privacy Policy.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>5. User Conduct</h2>
+                <p>You agree not to use our Services to:</p>
+                <ul>
+                    <li>Violate any applicable law or regulation</li>
+                    <li>Infringe the rights of any third party</li>
+                    <li>Harass, abuse, or harm another person</li>
+                    <li>Upload or transmit viruses or other malicious code</li>
+                    <li>Interfere with or disrupt the integrity or performance of our Services</li>
+                    <li>Attempt to gain unauthorized access to our Services or related systems</li>
+                </ul>
+            </div>
+            
+            <div class="terms-section">
+                <h2>6. Intellectual Property</h2>
+                <p>The Services and their original content, features, and functionality are owned by The PharmAcI and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
+                
+                <h3>6.1 Limited License</h3>
+                <p>Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, and revocable license to use our Services for your personal, non-commercial use.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>7. Disclaimer of Warranties</h2>
+                <p>THE SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+                
+                <p>WE DO NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT THE SERVICES OR THE SERVERS THAT MAKE THEM AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>8. Limitation of Liability</h2>
+                <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL THE PHARMACI, ITS AFFILIATES, OR THEIR LICENSORS, SERVICE PROVIDERS, EMPLOYEES, AGENTS, OFFICERS, OR DIRECTORS BE LIABLE FOR DAMAGES OF ANY KIND, UNDER ANY LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF THE SERVICES, INCLUDING ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>9. Indemnification</h2>
+                <p>You agree to defend, indemnify, and hold harmless The PharmAcI, its affiliates, and their respective officers, directors, employees, and agents from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to your violation of these Terms or your use of the Services.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>10. Termination</h2>
+                <p>We may terminate or suspend your access to the Services immediately, without prior notice or liability, for any reason whatsoever, including, without limitation, if you breach these Terms.</p>
+                
+                <p>Upon termination, your right to use the Services will immediately cease. If you wish to terminate your account, you may simply discontinue using the Services.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>11. Changes to Terms</h2>
+                <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+                
+                <p>By continuing to access or use our Services after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Services.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>12. Governing Law</h2>
+                <p>These Terms shall be governed and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of law provisions.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h2>13. Contact Us</h2>
+                <p>If you have any questions about these Terms, please contact us at:</p>
+                <ul>
+                    <li>Email: legal@pharmaci.com</li>
+                    <li>Phone: (555) 123-4567</li>
+                    <li>Address: 123 Health Street, Medical District</li>
+                </ul>
+            </div>
+            
+            <p class="last-updated">Last updated: February 28, 2025</p>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About The PharmAcI</h3>
+                <p>The PharmAcI combines cutting-edge AI technology with pharmaceutical expertise to provide you with accurate and personalized healthcare information.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">f</a>
+                    <a href="#" class="social-link">t</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">ig</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Health Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Our Services</h3>
+                <ul>
+                    <li><a href="services.html#prescriptions">Prescriptions</a></li>
+                    <li><a href="services.html#consultations">Consultations</a></li>
+                    <li><a href="services.html#vaccinations">Vaccinations</a></li>
+                    <li><a href="services.html#delivery">Home Delivery</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: info@pharmaci.com</li>
+                    <li>Phone: (555) 123-4567</li>
+                    <li>Address: 123 Health Street, Medical District</li>
+                    <li>Hours: Mon-Fri 8am-8pm, Sat 9am-5pm</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 The PharmAcI. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
