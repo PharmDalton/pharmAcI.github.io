@@ -3,98 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rex Chatbot</title>
+    <title>The PharmAcI - Your Virtual Pharmacy Assistant</title>
     <style>
         /* General Page Styling */
+        :root {
+            --primary: #3a86ff;
+            --secondary: #8338ec;
+            --accent: #ff006e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
         }
-
-        /* Dinosaur Image (Rex) */
+        
+        /* Chatbot Section */
+        .chatbot-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .chatbot-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .chatbot-header h2 {
+            margin: 0 0 0 1rem;
+            color: var(--primary);
+        }
+        
+        /* Rex Character */
         #rex {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 100px;
+            width: 50px;
             height: auto;
             cursor: pointer;
+            transition: transform 0.3s;
         }
-
-        /* Navigation Bar */
-        .nav-bar {
-            position: absolute;
-            left: -150px; /* Hidden by default */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 150px;
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            transition: left 0.3s ease; /* Smooth slide-out effect */
-            border-radius: 0 10px 10px 0;
-            cursor: pointer;
+        
+        #rex:hover {
+            transform: scale(1.1);
         }
-
-        .nav-bar:hover {
-            left: 0; /* Slide out on hover */
-        }
-
-        .nav-bar a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            display: block;
-            margin: 10px 0;
-        }
-
+        
         /* Chatbot Container */
         #chatbox {
-            width: 850px;
+            width: 100%;
+            max-width: 850px;
             height: 450px;
-            border: 2px solid #ccc;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
             background: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+        }
+        
+        /* Services Section */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 1rem;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bars -->
-    <div class="nav-bar" style="top: 20%;">
-        <a href="#ask-ai-rex">Ask AI Rex</a>
-    </div>
-    <div class="nav-bar" style="top: 40%;">
-        <a href="#how-to-do">How To Do</a>
-    </div>
-    <div class="nav-bar" style="top: 60%;">
-        <a href="#about-this-page">About This Page</a>
-    </div>
-
-    <!-- Cute Dinosaur Image (Rex) -->
-    <img id="rex" src="https://i.imgur.com/3QZQZQm.png" alt="Rex the Dinosaur">
-
-    <!-- Embedded Hugging Face Chatbot -->
-    <div id="chatbox">
-        <!-- Your Hugging Face Space iframe -->
-        <iframe
-            src="https://pharmdalton-pharmaci.hf.space"
-            frameborder="0"
-            width="100%"
-            height="100%"
-        ></iframe>
-    </div>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                The Pharm<span>AcI</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#medications">Medications</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Chatbot Section -->
+        <section class="chatbot-section">
+            <div class="chatbot-header">
+                <img id="rex" src="https://i.imgur.com/3QZQZQm.png" alt="Rex the Pharmacy Assistant">
+                <h2>Chat with Rex, Your Pharmacy AI Assistant</h2>
+            </div>
+            <div id="chatbox">
+                <!-- Your Hugging Face Space iframe -->
+                <iframe
+                    src="https://pharmdalton-pharmaci.hf.space"
+                    frameborder="0"
+                    width="100%"
+                    height="100%"
+                ></iframe>
+            </div>
+            <p>Ask Rex about medications, side effects, drug interactions, or general health advice!</p>
+        </section>
+        
+        <!-- Services Section -->
+        <section class="services">
+            <div class="service-card">
+                <h3>Prescription Refills</h3>
+                <p>Easily refill your prescriptions online and get notified when they're ready for pickup.</p>
+            </div>
+            <div class="service-card">
+                <h3>Medication Consultations</h3>
+                <p>Schedule a one-on-one consultation with our pharmacists to discuss your medications.</p>
+            </div>
+            <div class="service-card">
+                <h3>Health Screenings</h3>
+                <p>We offer various health screenings including blood pressure, cholesterol, and diabetes testing.</p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About The PharmAcI</h3>
+                <p>The PharmAcI combines cutting-edge AI technology with pharmaceutical expertise to provide you with accurate and personalized healthcare information.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#blog">Health Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: info@pharmaci.com</li>
+                    <li>Phone: (555) 123-4567</li>
+                    <li>Address: 123 Health Street, Medical District</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 The PharmAcI. All rights reserved.
+        </div>
+    </footer>
 </body>
 </html>
