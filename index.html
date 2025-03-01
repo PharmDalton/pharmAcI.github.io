@@ -110,73 +110,111 @@
             align-items: center;
         }
         
-        /* Chatbot Section */
-        .chatbot-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 2rem;
-            animation: fadeIn 1s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chatbot-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .chatbot-header h2 {
-            margin: 0 0 0 1rem;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-        
-        /* Rex Character */
-        #rex {
-            width: 60px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.3s;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-        }
-        
-        #rex:hover {
-            transform: scale(1.2) rotate(10deg);
-        }
-        
-        /* Chatbot Container */
-        #chatbox {
-            width: 100%;
-            max-width: 850px;
-            height: 450px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            background: #fff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        
-        #chatbox:hover {
-            box-shadow: 0 15px 40px rgba(58, 134, 255, 0.2);
-            transform: translateY(-5px);
-        }
-        
-        .chatbot-info {
-            text-align: center;
-            max-width: 600px;
-            margin: 1rem auto;
-            padding: 1rem;
-            background-color: rgba(58, 134, 255, 0.1);
-            border-radius: 10px;
-            font-size: 0.95rem;
-        }
+<!-- Updated Chatbot Section Styles -->
+<style>
+    /* Chatbot Section */
+    .chatbot-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+        animation: fadeIn 1s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .chatbot-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        max-width: 1000px;
+    }
+    
+    .chatbot-header h2 {
+        margin: 0 0 0 1rem;
+        color: var(--primary);
+        font-size: 1.8rem;
+    }
+    
+    /* Rex Character */
+    #rex {
+        width: 70px;
+        height: auto;
+        cursor: pointer;
+        transition: transform 0.3s;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    }
+    
+    #rex:hover {
+        transform: scale(1.2) rotate(10deg);
+    }
+    
+    /* Chatbot Container */
+    #chatbox {
+        width: 100%;
+        max-width: 1000px;
+        height: 600px;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 12px 40px rgba(58, 134, 255, 0.15);
+        overflow: hidden;
+        transition: all 0.4s;
+        margin: 0.5rem 0 2rem;
+        position: relative;
+    }
+    
+    #chatbox:hover {
+        box-shadow: 0 20px 50px rgba(58, 134, 255, 0.25);
+        transform: translateY(-5px);
+    }
+    
+    #chatbox iframe {
+        border: none;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+    
+    .chatbot-info {
+        text-align: center;
+        max-width: 750px;
+        margin: 0 auto;
+        padding: 1.2rem;
+        background-color: rgba(58, 134, 255, 0.08);
+        border-radius: 12px;
+        font-size: 1rem;
+        line-height: 1.5;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid var(--primary);
+    }
+</style>
+
+<!-- Updated Chatbot Section HTML -->
+<section class="chatbot-section">
+    <div class="chatbot-header">
+        <img id="rex" src="path/to/rex-pharmacy-dinosaur.svg" alt="Rex the Pharmacy Assistant">
+        <h2>Chat with Rex, Your Pharmacy AI Assistant</h2>
+    </div>
+    <div id="chatbox">
+        <!-- Updated iframe with scrolling disabled and parameters to hide Additional Inputs -->
+        <iframe
+            src="https://pharmdalton-pharmaci.hf.space?__theme=light&__hide_additional_inputs=true"
+            frameborder="0"
+            width="100%"
+            height="100%"
+            scrolling="no"
+            allowtransparency="true"
+        ></iframe>
+    </div>
+    <div class="chatbot-info">
+        <p>Ask Rex about medications, side effects, drug interactions, or general health advice! Our AI assistant is available 24/7 to help answer your pharmacy-related questions.</p>
+    </div>
+</section>
         
         /* Services Section */
         .section-title {
