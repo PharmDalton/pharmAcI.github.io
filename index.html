@@ -13,6 +13,7 @@
             --light: #f8f9fa;
             --dark: #212529;
             --success: #28a745;
+            --warning: #ffc107;
         }
         
         body {
@@ -30,6 +31,9 @@
             color: white;
             padding: 1rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
         .header-container {
@@ -45,10 +49,16 @@
             align-items: center;
             font-size: 1.8rem;
             font-weight: 700;
+            text-decoration: none;
+            color: white;
         }
         
         .logo span {
             color: var(--accent);
+        }
+        
+        .logo:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
         
         /* Navigation */
@@ -61,17 +71,33 @@
         
         nav li {
             margin: 0 1rem;
+            position: relative;
         }
         
         nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+            display: inline-block;
         }
         
         nav a:hover {
             color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
         }
         
         /* Main Content */
@@ -91,6 +117,12 @@
             flex-direction: column;
             align-items: center;
             margin-bottom: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .chatbot-header {
@@ -102,18 +134,20 @@
         .chatbot-header h2 {
             margin: 0 0 0 1rem;
             color: var(--primary);
+            font-size: 1.8rem;
         }
         
         /* Rex Character */
         #rex {
-            width: 50px;
+            width: 60px;
             height: auto;
             cursor: pointer;
             transition: transform 0.3s;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
         }
         
         #rex:hover {
-            transform: scale(1.1);
+            transform: scale(1.2) rotate(10deg);
         }
         
         /* Chatbot Container */
@@ -122,44 +156,196 @@
             max-width: 850px;
             height: 450px;
             border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            border-radius: 15px;
             background: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        #chatbox:hover {
+            box-shadow: 0 15px 40px rgba(58, 134, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .chatbot-info {
+            text-align: center;
+            max-width: 600px;
+            margin: 1rem auto;
+            padding: 1rem;
+            background-color: rgba(58, 134, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.95rem;
         }
         
         /* Services Section */
+        .section-title {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary);
+            font-size: 2rem;
+            width: 100%;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
         .services {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             width: 100%;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
         
         .service-card {
             background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
+            border-radius: 12px;
+            padding: 2rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border-bottom: 4px solid transparent;
+        }
+        
+        .service-card:nth-child(1) {
+            border-bottom-color: var(--primary);
+        }
+        
+        .service-card:nth-child(2) {
+            border-bottom-color: var(--secondary);
+        }
+        
+        .service-card:nth-child(3) {
+            border-bottom-color: var(--accent);
         }
         
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
         }
         
         .service-card h3 {
             color: var(--primary);
             margin-top: 0;
+            font-size: 1.4rem;
+        }
+        
+        .service-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .service-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .service-button:hover {
+            background-color: var(--secondary);
+            transform: scale(1.05);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            width: 100%;
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: rgba(131, 56, 236, 0.05);
+            border-radius: 15px;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* Call To Action */
+        .cta {
+            width: 100%;
+            margin: 3rem 0;
+            padding: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 1rem 2rem;
+            background-color: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
         /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem 2rem;
             margin-top: auto;
         }
         
@@ -174,12 +360,26 @@
         .footer-column {
             flex: 1;
             min-width: 200px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
         }
         
         .footer-column h3 {
             color: var(--accent);
             margin-top: 0;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
         }
         
         .footer-column ul {
@@ -189,28 +389,97 @@
         }
         
         .footer-column li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
         }
         
         .footer-column a {
             color: var(--light);
             text-decoration: none;
             transition: color 0.3s;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .footer-column a::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: transform 0.3s;
         }
         
         .footer-column a:hover {
             color: var(--accent);
         }
         
+        .footer-column a:hover::before {
+            transform: translateX(3px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
         .copyright {
             text-align: center;
             margin-top: 2rem;
-            padding-top: 1rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Subpage Styles */
+        .subpage-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .subpage-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subpage-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
         
         /* Responsive */
         @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
             nav ul {
                 flex-direction: column;
                 text-align: center;
@@ -223,6 +492,35 @@
             .footer-content {
                 flex-direction: column;
             }
+            
+            .chatbot-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .chatbot-header h2 {
+                margin: 1rem 0 0;
+            }
+            
+            .cta {
+                padding: 2rem 1rem;
+            }
+        }
+        
+        /* Page transition effects */
+        .page-transition {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -230,23 +528,23 @@
     <!-- Header -->
     <header>
         <div class="header-container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 The Pharm<span>AcI</span>
-            </div>
+            </a>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#medications">Medications</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="medications.html">Medications</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     
     <!-- Main Content -->
-    <main>
+    <main class="page-transition">
         <!-- Chatbot Section -->
         <section class="chatbot-section">
             <div class="chatbot-header">
@@ -262,23 +560,58 @@
                     height="100%"
                 ></iframe>
             </div>
-            <p>Ask Rex about medications, side effects, drug interactions, or general health advice!</p>
+            <div class="chatbot-info">
+                <p>Ask Rex about medications, side effects, drug interactions, or general health advice! Our AI assistant is available 24/7 to help answer your pharmacy-related questions.</p>
+            </div>
         </section>
         
         <!-- Services Section -->
+        <h2 class="section-title" id="services">Our Services</h2>
         <section class="services">
             <div class="service-card">
+                <div class="icon">💊</div>
                 <h3>Prescription Refills</h3>
-                <p>Easily refill your prescriptions online and get notified when they're ready for pickup.</p>
+                <p>Easily refill your prescriptions online and get notified when they're ready for pickup. No more waiting in line!</p>
+                <a href="services.html#refills" class="service-button">Learn More</a>
             </div>
             <div class="service-card">
+                <div class="icon">👨‍⚕️</div>
                 <h3>Medication Consultations</h3>
-                <p>Schedule a one-on-one consultation with our pharmacists to discuss your medications.</p>
+                <p>Schedule a one-on-one consultation with our pharmacists to discuss your medications and optimize your treatment.</p>
+                <a href="services.html#consultations" class="service-button">Learn More</a>
             </div>
             <div class="service-card">
+                <div class="icon">🩺</div>
                 <h3>Health Screenings</h3>
-                <p>We offer various health screenings including blood pressure, cholesterol, and diabetes testing.</p>
+                <p>We offer various health screenings including blood pressure, cholesterol, and diabetes testing at affordable rates.</p>
+                <a href="services.html#screenings" class="service-button">Learn More</a>
             </div>
+        </section>
+        
+        <!-- Testimonials -->
+        <h2 class="section-title">What Our Customers Say</h2>
+        <section class="testimonials">
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">Rex helped me understand my medication schedule and potential side effects. Such a convenient way to get pharmacy advice!</p>
+                    <p class="testimonial-author">- Sarah Johnson</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">The prescription refill service is so easy to use. I get text notifications when my medications are ready. Couldn't be happier!</p>
+                    <p class="testimonial-author">- Michael Chen</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">As someone with multiple medications, having Rex available 24/7 to answer my questions about drug interactions has been invaluable.</p>
+                    <p class="testimonial-author">- Elizabeth Taylor</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="cta">
+            <h2>Ready to Experience Modern Pharmacy Care?</h2>
+            <p>Join thousands of satisfied customers who trust The PharmAcI for their medication needs.</p>
+            <a href="contact.html" class="cta-button">Contact Us Today</a>
         </section>
     </main>
     
@@ -288,14 +621,29 @@
             <div class="footer-column">
                 <h3>About The PharmAcI</h3>
                 <p>The PharmAcI combines cutting-edge AI technology with pharmaceutical expertise to provide you with accurate and personalized healthcare information.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">f</a>
+                    <a href="#" class="social-link">t</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">ig</a>
+                </div>
             </div>
             <div class="footer-column">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Terms of Service</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#blog">Health Blog</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="blog.html">Health Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Our Services</h3>
+                <ul>
+                    <li><a href="services.html#prescriptions">Prescriptions</a></li>
+                    <li><a href="services.html#consultations">Consultations</a></li>
+                    <li><a href="services.html#vaccinations">Vaccinations</a></li>
+                    <li><a href="services.html#delivery">Home Delivery</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -304,6 +652,7 @@
                     <li>Email: info@pharmaci.com</li>
                     <li>Phone: (555) 123-4567</li>
                     <li>Address: 123 Health Street, Medical District</li>
+                    <li>Hours: Mon-Fri 8am-8pm, Sat 9am-5pm</li>
                 </ul>
             </div>
         </div>
