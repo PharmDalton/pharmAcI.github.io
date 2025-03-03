@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About PharmAcI - Your Pharmacy Care</title>
+    <style>
+        /* Light purple color scheme */
+        :root {
+            --purple: #9370DB; /* Medium purple */
+            --dark-purple: #7851A9; /* Darker purple */
+            --cvs-gray: #f1f1f1;
+            --cvs-dark-gray: #333333;
+            --cvs-light-gray: #e8e8e8;
+            --cvs-blue: #0055a5;
+            --white: #ffffff;
+            --black: #000000;
+            --light-purple: #E6E0F8; /* Very light purple for backgrounds */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--cvs-dark-gray);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header Styling */
+        .top-bar {
+            background-color: var(--cvs-gray);
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .top-bar-links a {
+            color: var(--cvs-dark-gray);
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .top-bar-links a:hover {
+            text-decoration: underline;
+        }
+        
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--purple);
+            margin-left: 8px;
+        }
+        
+        .logo-text span {
+            font-weight: normal;
+        }
+        
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .search-container button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .header-icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-icon {
+            margin-left: 20px;
+            color: var(--cvs-dark-gray);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        
+        .header-icon:hover {
+            color: var(--purple);
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--cvs-dark-gray);
+            border-radius: 3px;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            background-color: var(--purple);
+            color: white;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 20px;
+            display: inline-block;
+        }
+        
+        nav a:hover {
+            background-color: var(--dark-purple);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* About Page Styling */
+        .about-banner {
+            background-color: var(--purple);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            background-image: linear-gradient(rgba(147, 112, 219, 0.9), rgba(147, 112, 219, 0.8)), url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        
+        .about-banner h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+        
+        .about-section {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--cvs-light-gray);
+        }
+        
+        .about-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: var(--purple);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--purple);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .about-text ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .about-text li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .team-member {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .member-photo {
+            height: 240px;
+            overflow: hidden;
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 20px;
+        }
+        
+        .member-info h3 {
+            color: var(--purple);
+            margin-bottom: 5px;
+        }
+        
+        .member-info .position {
+            color: var(--cvs-dark-gray);
+            font-style: italic;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .cta-box {
+            background-color: var(--light-purple);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .cta-box h3 {
+            color: var(--purple);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--purple);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--dark-purple);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .contact-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--purple);
+            margin-bottom: 15px;
+        }
+        
+        .contact-card h3 {
+            margin-bottom: 10px;
+            color: var(--purple);
+        }
+        
+        .contact-card p, .contact-card a {
+            margin: 5px 0;
+            color: var(--cvs-dark-gray);
+            text-decoration: none;
+        }
+        
+        .contact-card a:hover {
+            color: var(--purple);
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--cvs-dark-gray);
+            color: white;
+            padding: 40px 20px 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--white);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--purple);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background-color: var(--purple);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .about-banner {
+                padding: 40px 30px;
+            }
+            
+            .about-banner h1 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .top-bar-links {
+                margin-top: 5px;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .top-bar-links a {
+                margin: 5px 8px;
+                font-size: 0.75rem;
+            }
+            
+            .header-container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+                order: 3;
+            }
+            
+            .logo {
+                margin-bottom: 0;
+            }
+            
+            .search-container {
+                order: 4;
+                flex-basis: 100%;
+                max-width: 100%;
+                margin: 15px 0 0;
+            }
+            
+            .header-icons {
+                order: 2;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                display: none;
+            }
+            
+            .nav-open nav ul {
+                display: flex;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .about-banner {
+                padding: 30px 20px;
+            }
+            
+            .about-banner h1 {
+                font-size: 1.8rem;
+            }
+            
+            .about-banner p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .header-icon span {
+                display: none;
+            }
+            
+            .header-icon {
+                margin-left: 15px;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .about-banner {
+                padding: 25px 15px;
+            }
+            
+            .about-banner h1 {
+                font-size: 1.6rem;
+            }
+            
+            .about-content {
+                gap: 20px;
+            }
+            
+            .contact-details {
+                flex-direction: column;
+            }
+            
+            .contact-card {
+                width: 100%;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            main {
+                padding: 15px;
+            }
+            
+            .cta-button {
+                width: 100%;
+                text-align: center;
+                padding: 10px 15px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        /* Mobile menu script styles */
+        .nav-open .mobile-menu-toggle span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .nav-open .mobile-menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-open .mobile-menu-toggle span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        .nav-open .mobile-menu-toggle span {
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        
+        .mobile-menu-toggle span {
+            transition: transform 0.3s, opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="store-locator">
+                <span>Find a Store</span>
+            </div>
+            <div class="top-bar-links">
+                <a href="#">Sign In</a>
+                <a href="#">Create Account</a>
+                <a href="#">ExtraCare®</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">Pharm<span>AcI</span></div>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header-icons">
+                <a href="#" class="header-icon">
+                    <div>👤</div>
+                    <span>Account</span>
+                </a>
+                <a href="#" class="header-icon">
+                    <div>🛒</div>
+                    <span>Cart</span>
+                </a>
+            </div>
+            <div class="search-container">
+                <input type="text" placeholder="Search for products, services, conditions...">
+                <button type="submit">🔍</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <div class="nav-container" id="navContainer">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Pharmacy</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">MinuteClinic</a></li>
+                <li><a href="#">ExtraCare</a></li>
+                <li><a href="#">Photo</a></li>
+                <li><a href="#">Optical</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- About Banner -->
+        <section class="about-banner">
+            <h1>About PharmAcI</h1>
+            <p>Empowering pharmacists with AI technology to enhance patient care and streamline operations</p>
+        </section>
+        
+        <!-- Vision and Mission Section -->
+        <section class="about-section">
+            <h2 class="section-title">Our Vision</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>PharmAcI was created to demonstrate how pharmacists—even those without coding experience—can leverage AI technology to transform the modern pharmacy experience. Our project showcases what's possible when pharmacy professionals embrace AI tools to enhance patient care and streamline their operations.</p>
+                    
+                    <p>We believe that AI shouldn't replace pharmacists but instead should augment their capabilities, allowing them to focus more on meaningful patient interactions while automating routine tasks. PharmAcI demonstrates how an AI assistant like Rex can handle common questions, provide medication information, and improve the overall patient experience.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="Pharmacy with technology">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Why PharmAcI Section -->
+        <section class="about-section">
+            <h2 class="section-title">Why PharmAcI Matters</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="AI and Pharmacy Integration">
+                </div>
+                <div class="about-text">
+                    <p>PharmAcI was created as a proof of concept to show other pharmacists what's possible with AI integration. This project showcases:</p>
+                    
+                    <ul>
+                        <li><strong>Accessible Technology</strong>: How pharmacists without coding skills can create powerful AI-enhanced tools</li>
+                        <li><strong>Enhanced Patient Experiences</strong>: 24/7 access to accurate medication information through an AI assistant</li>
+                        <li><strong>Operational Efficiency</strong>: Automating routine questions to free up pharmacist time for complex care</li>
+                        <li><strong>Low Cost Implementation</strong>: Demonstrating that powerful AI tools can be implemented for under $10</li>
+                        <li><strong>Future Vision</strong>: A glimpse into how pharmacy websites can evolve with integrated AI assistants</li>
+                    </ul>
+                    
+                    <p>What started as an experiment has grown into a showcase for how AI technology can be leveraged in pharmacy settings without extensive technical knowledge or significant financial investment.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- The Creator Section -->
+        <section class="about-section">
+            <h2 class="section-title">Meet the Creator</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>PharmAcI was created by Dalton Thompson, a pharmacist who saw the potential for AI to transform pharmacy practice. Recognizing the gap between available AI technology and its implementation in pharmacy settings, Dalton created PharmAcI to demonstrate how pharmacists can use these tools regardless of their technical background.</p>
+                    
+                    <p>With minimal investment and leveraging existing AI models, Dalton built a responsive pharmacy chatbot that can answer patient questions 24/7, provide medication information, and handle routine inquiries that would otherwise require pharmacist time.</p>
+                    
+                    <p>This project represents Dalton's vision of the modern pharmacy—one where technology enhances rather than replaces the personal touch of pharmacy care, allowing pharmacists to focus their expertise where it matters most.</p>
+                    
+                    <div class="cta-box">
+                        <h3>Connect with Dalton</h3>
+                        <p>Interested in collaborating on future projects, implementing AI in your pharmacy, or learning more about how PharmAcI was built?</p>
+                        <a href="https://www.linkedin.com/in/dalton-thompson-pharmaci" target="_blank" class="cta-button">Connect on LinkedIn</a>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/600/400" alt="Dalton Thompson">
+                </div>
+            </div>
+        </section>
+        
+        <!-- How It Works Section -->
+        <section class="about-section">
+            <h2 class="section-title">How PharmAcI Was Built</h2>
+            <p>This project demonstrates that powerful AI tools can be implemented with minimal resources. PharmAcI was created with:</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <ul>
+                        <li><strong>Less than $10 investment</strong> for hosting and implementation</li>
+                        <li><strong>No coding experience required</strong> - built using AI assistance for the technical aspects</li>
+                        <li><strong>Minimal time investment</strong> once the fundamental knowledge was acquired</li>
+                        <li><strong>Standard AI tools</strong> available to anyone, configured specifically for pharmacy use</li>
+                    </ul>
+                    
+                    <p>If this project receives significant interest, we plan to release a comprehensive guide detailing the exact process used to create PharmAcI, allowing other pharmacists to implement similar solutions in their practices.</p>
+                </div>
+            </div>
+            
+            <div class="cta-box">
+                <h3>Future Development</h3>
+                <p>Do you have ideas for how AI or agentic models could be implemented in pharmacy settings? Or are you looking for guidance on implementing similar solutions?</p>
+                <p>We're interested in collaborating with forward-thinking pharmacy professionals to explore the potential of AI in healthcare.</p>
+                <a href="mailto:info@pharmaci.example.com" class="cta-button">Contact Us</a>
+            </div>
+        </section>
+        
+        <!-- Contact Information -->
+        <section class="about-section">
+            <h2 class="section-title">Get In Touch</h2>
+            <p>We're excited to hear from fellow pharmacists, healthcare professionals, and anyone interested in the integration of AI in healthcare settings.</p>
+            
+            <div class="contact-details">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <a href="mailto:info@pharmaci.example.com">info@pharmaci.example.com</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🔗</div>
+                    <h3>LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/dalton-thompson-pharmaci" target="_blank">Dalton Thompson</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">🌐</div>
+                    <h3>Website</h3>
+                    <a href="#">www.pharmaci.example.com</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About PharmAcI</h3>
+                <p>PharmAcI combines the latest AI technology with pharmaceutical expertise to provide personalized healthcare information.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">f</a>
+                    <a href="#" class="social-link">t</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">ig</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#">Medications</a></li>
+                    <li><a href="#">Health & Wellness</a></li>
+                    <li><a href="#">Personal Care</a></li>
+                    <li><a href="#">Vitamins</a></li>
+                    <li><a href="#">Beauty</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Pharmacy</a></li>
+                    <li><a href="#">MinuteClinic</a></li>
+                    <li><a href="#">Health Insurance</a></li>
+                    <li><a href="#">Optical Center</a></li>
+                    <li><a href="#">Vaccinations</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Help</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Store Locator</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 PharmAcI. All rights reserved.
+        </div>
+    </footer>
+    
+    <!-- JavaScript for mobile menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navContainer = document.getElementById('navContainer');
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                document.body.classList.toggle('nav-open');
+                navContainer.classList.toggle('nav-open');
+            });
+        });
+    </script>
+</body>
+</html>
