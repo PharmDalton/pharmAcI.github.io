@@ -258,7 +258,13 @@
             border: 1px solid var(--cvs-light-gray);
             border-radius: 8px;
             overflow: hidden;
-            background: var(--white);
+            background: transparent;
+        }
+        
+        #chatbox iframe {
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
         }
         
         .chatbot-info {
@@ -550,16 +556,17 @@
                 <h2>Ask Rex, Your AI Pharmacy Assistant</h2>
             </div>
             <div id="chatbox">
-                <!-- Your Hugging Face Space iframe -->
+                <!-- Your Hugging Face Space iframe with scrolling disabled -->
                 <iframe
                     src="https://pharmdalton-pharmaci.hf.space"
                     frameborder="0"
                     width="100%"
                     height="100%"
+                    scrolling="no"
                 ></iframe>
             </div>
             <div class="chatbot-info">
-                <p>Ask Rex about medications, side effects, drug interactions, or general health advice! Our AI assistant uses advanced technology to provide helpful pharmacy information anytime you need it.</p>
+                <p>Ask Rex about medications, side effects, drug interactions, or general health advice! Try questions like "When do you close today?", "Do you take Tricare?", or "What are the side effects of ibuprofen?"</p>
             </div>
         </section>
         
