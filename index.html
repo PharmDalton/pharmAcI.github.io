@@ -138,6 +138,24 @@
             color: var(--purple);
         }
         
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--cvs-dark-gray);
+            border-radius: 3px;
+        }
+        
         /* Navigation */
         .nav-container {
             background-color: var(--purple);
@@ -448,34 +466,107 @@
             color: #aaa;
         }
         
-        /* Responsive */
-        @media (max-width: 900px) {
+        /* Improved Responsive Design */
+        @media (max-width: 1024px) {
             .services {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-banner {
+                padding: 30px;
+            }
+            
+            .hero-banner h1 {
+                font-size: 2rem;
             }
         }
         
         @media (max-width: 768px) {
+            .top-bar-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .top-bar-links {
+                margin-top: 5px;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .top-bar-links a {
+                margin: 5px 8px;
+                font-size: 0.75rem;
+            }
+            
             .header-container {
                 flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+                order: 3;
             }
             
             .logo {
-                margin-bottom: 10px;
+                margin-bottom: 0;
             }
             
             .search-container {
-                order: 3;
+                order: 4;
+                flex-basis: 100%;
                 max-width: 100%;
-                margin: 10px 0 0;
+                margin: 15px 0 0;
+            }
+            
+            .header-icons {
+                order: 2;
             }
             
             nav ul {
-                flex-wrap: wrap;
+                flex-direction: column;
+                display: none;
+            }
+            
+            .nav-open nav ul {
+                display: flex;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
             
             .offers {
                 grid-template-columns: 1fr;
+            }
+            
+            .hero-banner {
+                padding: 25px;
+            }
+            
+            .hero-banner h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-banner p {
+                font-size: 1rem;
+            }
+            
+            #chatbox {
+                height: 400px;
+            }
+            
+            .chatbot-header {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .chatbot-header h2 {
+                font-size: 1.2rem;
+                margin-left: 10px;
             }
         }
         
@@ -483,6 +574,92 @@
             .services {
                 grid-template-columns: 1fr;
             }
+            
+            .header-icon span {
+                display: none;
+            }
+            
+            .header-icon {
+                margin-left: 15px;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .chatbot-section {
+                padding: 15px;
+            }
+            
+            #rex {
+                width: 40px;
+            }
+            
+            .chatbot-header h2 {
+                font-size: 1.1rem;
+            }
+            
+            #chatbox {
+                height: 350px;
+            }
+            
+            .offer-card {
+                padding: 15px;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .offer-icon {
+                margin: 0 0 15px 0;
+            }
+            
+            .hero-banner {
+                padding: 20px;
+            }
+            
+            .hero-banner h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            main {
+                padding: 15px;
+            }
+            
+            .cta-button {
+                width: 100%;
+                text-align: center;
+                padding: 10px 15px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        /* Mobile menu script styles */
+        .nav-open .mobile-menu-toggle span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .nav-open .mobile-menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-open .mobile-menu-toggle span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        .nav-open .mobile-menu-toggle span {
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        
+        .mobile-menu-toggle span {
+            transition: transform 0.3s, opacity 0.3s;
         }
     </style>
 </head>
@@ -508,9 +685,10 @@
             <a href="index.html" class="logo">
                 <div class="logo-text">Pharm<span>AcI</span></div>
             </a>
-            <div class="search-container">
-                <input type="text" placeholder="Search for products, services, conditions...">
-                <button type="submit">🔍</button>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
             <div class="header-icons">
                 <a href="#" class="header-icon">
@@ -522,11 +700,15 @@
                     <span>Cart</span>
                 </a>
             </div>
+            <div class="search-container">
+                <input type="text" placeholder="Search for products, services, conditions...">
+                <button type="submit">🔍</button>
+            </div>
         </div>
     </header>
     
     <!-- Navigation -->
-    <div class="nav-container">
+    <div class="nav-container" id="navContainer">
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -679,5 +861,18 @@
             &copy; 2025 PharmAcI. All rights reserved.
         </div>
     </footer>
+    
+    <!-- JavaScript for mobile menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navContainer = document.getElementById('navContainer');
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                document.body.classList.toggle('nav-open');
+                navContainer.classList.toggle('nav-open');
+            });
+        });
+    </script>
 </body>
 </html>
