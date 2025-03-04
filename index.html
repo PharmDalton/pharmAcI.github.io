@@ -236,7 +236,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
-        /* Chatbot Section */
+        /* Chatbot Section - UPDATED */
         .chatbot-section {
             background-color: var(--white);
             border-radius: 8px;
@@ -270,19 +270,27 @@
             transform: scale(1.1);
         }
         
+        /* Improved Chatbox and Iframe Styling */
         #chatbox {
             width: 100%;
-            height: 450px;
+            height: auto;
+            min-height: 500px;
             border: 1px solid var(--cvs-light-gray);
             border-radius: 8px;
             overflow: hidden;
             background: transparent;
+            margin-bottom: 15px;
+            position: relative;
         }
         
         #chatbox iframe {
-            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            border: none;
+            overflow: hidden;
         }
         
         .chatbot-info {
@@ -555,8 +563,9 @@
                 font-size: 1rem;
             }
             
+            /* Updated for responsive chatbox */
             #chatbox {
-                height: 400px;
+                min-height: 450px;
             }
             
             .chatbot-header {
@@ -599,8 +608,9 @@
                 font-size: 1.1rem;
             }
             
+            /* Updated for smaller screens */
             #chatbox {
-                height: 350px;
+                min-height: 400px;
             }
             
             .offer-card {
@@ -731,19 +741,18 @@
             <a href="#chatbot" class="cta-button">Chat with Rex Now</a>
         </section>
         
-        <!-- Chatbot Section -->
+        <!-- Chatbot Section - UPDATED -->
         <section id="chatbot" class="chatbot-section">
             <div class="chatbot-header">
                 <img id="rex" src="Rex trial 2.png" alt="Rex the Pharmacy Assistant">
                 <h2>Ask Rex, Your AI Pharmacy Assistant</h2>
             </div>
             <div id="chatbox">
-                <!-- Modified iframe with parameters to hide additional inputs -->
+                <!-- Modified iframe with improved spacing -->
                 <iframe
                     src="https://pharmdalton-pharmaci.hf.space?__hide_input=true"
                     frameborder="0"
-                    width="100%"
-                    height="100%"
+                    style="width: 100%; height: 100%; min-height: 500px; overflow: hidden;"
                     scrolling="no"
                 ></iframe>
             </div>
